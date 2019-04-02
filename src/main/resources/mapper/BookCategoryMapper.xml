@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djcps.library.mapper.BookCategoryMapper">
+	<resultMap type="BookCategory" id="BookCategoryResultMap">
+		<id column="category_id" property="bookCategoryId" />
+		<result column="category_name" property="bookCategoryName" />
+	</resultMap>
+	
+	<insert id="insertBookCategory" parameterType="com.djcps.library.model.BookCategory"
+		keyProperty="bookCategoryId" useGeneratedKeys="true">
+		insert into book_category(category_name) values(#{categoryName})
+	</insert>
+	
+	<delete id="deleteBookCategory" parameterType="Integer">
+	 delete from book_category where category_id=#{bookCategoryId}
+	</delete>
+	
+	<select id="selectBookCategory" resultMap="BookCategoryResultMap">
+		select * from book_category 
+	</select>
+	
+	<select id="selectBookCategoryById" resultMap="BookCategoryResultMap">
+		select * from book_category where where category_id=#{bookCategoryId}
+	</select>
+	
+	<update id="updateBookCategory" parameterType="com.djcps.library.model.BookCategory">
+		update book_category set category_name=#{bookCategoryName} where category_id=#{bookCategoryId}
+	</update>
+</mapper>

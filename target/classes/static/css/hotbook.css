@@ -1,0 +1,95 @@
+html{
+
+}
+body{
+   font-family:"Microsoft Yahei";
+   font-size:12px;
+   margin:0;
+   background: #fff url(../images/2.jpg) 50% 0 no-repeat;
+}
+.top{
+    margin:0 auto;
+    width:800px;
+    border:2px solid #eee;
+    border-bottom:none;
+    position:relative;
+    background-color: white;
+}
+h1{margin:80px auto 50px auto;text-align:center;color:#fff;margin-left:-50px;margin-top:10px;font-size:35px;font-weight: bold;text-shadow: 0px 1px 1px #555;}
+h1 sup{
+    font-size: 18px;
+    font-style: normal;
+    position: absolute;
+    margin-left: 10px;}
+.login {border:0;padding:5px 0;
+background: #fff;
+margin: 0 auto;
+-webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);
+box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);}
+
+select{
+                width:  200px;
+                height: 24px;
+                margin-left: 30px;
+            }
+.select_2{
+    margin-left: 50px;
+    background:#2795dc;border:none;cursor:pointer;
+    border-bottom:3px solid #0078b3;*border-bottom:none;
+    color:#fff;
+}
+.select_2:hover{
+    background:#0081c1;
+    border-bottom:3px solid #006698;*border-bottom:none;
+    color:#fff;
+    text-decoration:none;
+}
+.button_1{
+    background:#2795dc;border:none;cursor:pointer;
+    border-bottom:3px solid #0078b3;*border-bottom:none;
+    color:#fff;
+}
+.button_1:hover{
+    background:#0081c1;
+    border-bottom:3px solid #006698;*border-bottom:none;
+    color:#fff;
+    text-decoration:none;
+}
+.container {
+                overflow: hidden;
+            }
+            .container .left,
+            .container .right {
+                float: left;
+                margin-bottom: -10000px;
+                padding-bottom: 10000px;
+            }
+            .container .left {
+                width: 14%;
+                border-right: 1px solid #28FF28;
+                margin-left: 50px;
+            }
+            .container .right {
+                width: 79%;
+              
+
+            }
+a h2{
+    color: #FFFF00;
+    font-size: 50;
+}
+a{
+    text-decoration:none;
+}
+
+.button_1{
+    background:#2795dc;border:none;cursor:pointer;
+    border-bottom:3px solid #0078b3;*border-bottom:none;
+    color:#fff;
+}
+.button_1:hover{
+    background:#0081c1;
+    border-bottom:3px solid #006698;*border-bottom:none;
+    color:#fff;
+    text-decoration:none;
+}

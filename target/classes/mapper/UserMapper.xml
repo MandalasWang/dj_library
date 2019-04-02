@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djcps.library.mapper.UserMapper">
+	<resultMap type="User" id="userResultMap">
+		<id column="user_id" property="userId" />
+		<result column="user_name" property="userName" />
+		<result column="user_pwd" property="userPwd" />
+		<result column="user_phone" property="userPhone" />
+		<result column="isallowborrow" property="isAllowBorrow" />
+		<result column="score" property="score" />
+	</resultMap>
+	<!-- 插入注册用户数据 -->
+	<insert id="register"
+		parameterType="com.djcps.library.model.User"
+		keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO p_user(user_name,user_pwd,user_phone,isallowborrow,score)
+		VALUES(#{userName},#{userPwd},#{userPhone},#{isAllowBorrow},#{score})
+	</insert>
+	
+	 <!-- 登录功能的实现 -->
+	<select id="findUser" resultMap="userResultMap">
+       select * from p_user where user_phone = #{userPhone} 
+       		and user_pwd =#{userPwd};
+    </select>
+   
+   
+    <!-- 查询用户是否存在 -->
+    <select id="findUserByUserPhone" resultMap="userResultMap" >
+       select * from p_user where user_phone = #{phone} ;
+    </select>
+	
+	<!-- 查询用户是否存在 -->
+    <select id="findUserById" resultMap="userResultMap" >
+       select * from p_user where user_id = #{id} ;
+    </select>
+	
+	<update id="updateUser" parameterType="com.djcps.library.model.User" >
+	update p_user set user_name=#{userName},user_pwd=#{userPwd} where user_phone=#{userPhone}
+	</update>
+
+	<!-- 查询用户总数 -->
+	<select id="getUserTotalCounts" resultType="java.lang.Integer">
+		select count(user_id) from p_user
+	</select>
+	
+	<!-- 按照页数查询用户信息 -->
+	<select id="selectAllByCondition" resultMap="userResultMap">
+		select * from p_user limit ${pageIndex},${pageSize}
+	</select>
+	
+	<update id="isAllowBorrowByid" parameterType="Integer">
+		 update p_user set isallowborrow=#{power} where user_id = #{userId}
+	</update>
+
+	<!-- 按照读者分数进行排名 -->
+	<select id="autoSortScore" resultMap="userResultMap">
+	SELECT * FROM  p_user ORDER BY score DESC  LIMIT #{pageIndex},#{pageSize}
+	</select>
+	
+	<update id="addScoreByUserId" >
+	update p_user set score = score + #{score} where user_id =#{userId}
+	</update>
+	
+	<select id="selectPwdByPhone"  resultType="String">
+	select user_pwd from p_user where user_phone=#{phone}
+	</select>
+</mapper>

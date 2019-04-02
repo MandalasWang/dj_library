@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.djcps.library.mapper.BorrowingBooksMapper">
+   
+	<resultMap type="BorrowingBooks" id="BookBorrowResultMap">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="book_id" property="bookId" />
+		<result column="date" property="date" />
+        <result column="lastdate" property="lastdate" />
+        <result column="isreturn" property="isreturn" />
+	</resultMap>
+  
+   <!-- 插入借书数据 -->
+	<insert id="borrowBook"
+		parameterType="com.djcps.library.model.BorrowingBooks"
+		keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO borrowingbooks(user_id,book_id,date,lastdate,isreturn)
+		VALUES(#{userId},#{bookId},#{date},#{lastdate},#{isreturn})
+	</insert>
+	
+	<delete id="deleteBorrowingBooks" parameterType="Integer">
+	 delete from borrowingbooks where book_id=#{bookId}
+	</delete>
+	
+	<!-- 更新借书数据 返还书籍-->
+	<update id="retunBook"  parameterType="Integer" >
+	    update borrowingbooks set isreturn=#{isreturn} where id = #{brrowingbookid}
+	</update>
+	<!-- 查询所有借书记录 -->
+	<select id="selectAllByCondition" resultMap="BookBorrowResultMap">
+	   select * from borrowingbooks  where isreturn=0 order by lastdate desc limit ${pageIndex},${pageSize}
+	</select>
+	
+	 <!-- 查询借书记录总数 -->
+	 <select id="getBorrowingTotalCount" resultType="java.lang.Integer">
+	    select count(*) from borrowingbooks where isreturn=0
+	 </select>
+	 
+	 <!-- 根据id获取书籍借出信息 -->
+	 <select id="getBorrowMsgByid" resultMap="BookBorrowResultMap">
+	 select * from borrowingbooks where id =#{id}
+	 </select>
+	 <!-- 根据id更新借书记录 -->
+	 <update id="updatelastdateByid">
+	 update borrowingbooks set lastdate =#{lastdate},isreturn = 0 where id =#{id}
+	 </update>
+	 
+	 <select id="getBorrowMsgBybookId" resultMap="BookBorrowResultMap">
+	 select * from borrowingbooks where book_id =#{bookId} and isreturn=#{isreturn}
+	 </select>
+	
+	 <select id="getBorrowRecordByBookId" resultMap="BookBorrowResultMap">
+	  select * from borrowingbooks where  book_id =#{bookId} 
+	 </select>
+	 
+	 <select id="getBorrowingBookTotalCountsByUserId" resultType="java.lang.Integer">
+	 select count(*) from borrowingbooks where user_id=#{userId} and isreturn=0
+	 </select>
+	 
+	 <select id="getBorrowingBookMsgByUserId" resultMap="BookBorrowResultMap">
+	 select * from borrowingbooks where user_id=#{userId} and isreturn=0  limit ${pageIndex},${pageSize}
+	 </select>
+	 
+	 <update id="updateReturnDateByid">
+	 update borrowingbooks set lastdate=#{returnDate} where  id=#{brrowingbookid}
+	 </update>
+	 
+	 <select id="getBorrowMsgBybookIdAndUserId" resultMap="BookBorrowResultMap">
+	 select * from borrowingbooks where book_id =#{bookId} and isreturn=#{isreturn} and user_id=#{userId}
+	 </select>
+	 
+</mapper>
